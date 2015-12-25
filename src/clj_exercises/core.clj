@@ -74,29 +74,25 @@
   (concat
     (conj []
       (assoc (first card-set) :faced-up true))
-      (seq (rest card-set))))
+    (seq (rest card-set))))
 
 (defn create-tableau [tableau-cols stock]
   (if (< (count tableau-cols) 7)
     (let [card-count (inc (count tableau-cols))]
       (create-tableau
-        (concat tableau-cols
-          (make-tableau-column
-            (take card-count stock)))
-        (drop card-count stock))
-    tableau-cols)))
+        (conj tableau-cols
+          (into []
+            (make-tableau-column
+              (take card-count stock))))
+        (drop card-count stock)))
+    tableau-cols))
 
-; (defn play-solitaire []
-;   (let
-;     [
-;       stock (drop 28 cards)
-;       foundation []
-;       waste []
-;       tableau (create-starter-tableau (take 28 cards))
-;       available-card (first stock)
-;     ]
-;     ; body stuff
-;     ))
+(defn play-solitaire []
+  (let [stock       (drop 28 cards)
+        tableau     (take 28 cards)
+        waste       []
+        foundations []]
+        ))
 
 (defn -main
   "I don't do a whole lot ... yet."
