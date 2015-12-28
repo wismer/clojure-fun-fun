@@ -60,7 +60,7 @@
     {:name "5", :suite "diamond", :color :red :faced-up false},
     {:name "4", :suite "diamond", :color :red :faced-up false},
     {:name "3", :suite "diamond", :color :red :faced-up false},
-    {:name "2", :suite "diamond", :color :red}
+    {:name "2", :suite "diamond", :color :red :faced-up false}
   ]))
 
 (defn available-suites [suite]
@@ -73,7 +73,7 @@
 (defn make-tableau-column [card-set]
   (concat
     (conj []
-      (assoc (first card-set) :faced-up true))
+      (flip-card (first card-set))
     (seq (rest card-set))))
 
 (defn create-tableau [tableau-cols stock]
@@ -87,12 +87,16 @@
         (drop card-count stock)))
     tableau-cols))
 
-(defn play-solitaire []
-  (let [stock       (drop 28 cards)
-        tableau     (take 28 cards)
-        waste       []
-        foundations []]
-        ))
+(defn flip-card [card]
+  (assoc card :flip-card true))
+
+(defn play-solitaire
+  ([]
+    (let [stock       (drop 28 cards)
+          tableau     (take 28 cards)
+          waste       []
+          foundations []]
+          )))
 
 (defn -main
   "I don't do a whole lot ... yet."
